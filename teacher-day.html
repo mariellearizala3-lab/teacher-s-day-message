@@ -322,6 +322,43 @@ const finalMessage=document.getElementById("finalMessage");
 const confetti=document.getElementById("confetti");
 const caret=document.getElementById("caret");
 const soundToggle=document.getElementById("soundToggle");
+const teacherMusic = document.getElementById("teachersMusic");
+
+let musicPlaying = false;
+soundToggle.addEventListener("click", () => {
+
+    if (!musicPlaying) {
+
+      teacherMusic.play()
+            .then(() => {
+                musicPlaying = true;
+
+                soundToggle.textContent = "🔊";
+                soundToggle.title = "Music on";
+                soundToggle.setAttribute(
+                    "aria-label",
+                    "Turn music off"
+                );
+            })
+            .catch(error => {
+                console.log("Music could not play:", error);
+            });
+
+    } else {
+
+        teacherMusic.pause();
+        musicPlaying = false;
+
+        soundToggle.textContent = "♫";
+        soundToggle.title = "Music off";
+        soundToggle.setAttribute(
+            "aria-label",
+            "Turn music on"
+        );
+
+    }
+
+});
 const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let opened=false,typingTimer=null,soundEnabled=false,audioContext=null;
 
