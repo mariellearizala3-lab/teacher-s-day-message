@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b2b1e">
+<title>Happy Teacher's Day</title>
+<style>
+:root{--green:#0b2b1e;--green2:#123b2a;--green3:#1d5238;--cream:#fbf3dc;--cream2:#fff9e9;--gold:#d6aa54;--gold2:#f0d28a;--ink:#233b2d;--red:#8d4239;--ease:cubic-bezier(.22,.75,.18,1)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}body{min-height:100vh;overflow-x:hidden;font-family:Georgia,"Times New Roman",serif;color:var(--cream);background:radial-gradient(circle at 50% 15%,rgba(61,116,80,.28),transparent 35%),linear-gradient(145deg,#061a12,#0b2b1e 50%,#071d15)}
+button,[tabindex]{-webkit-tap-highlight-color:transparent}button:focus-visible,[role=button]:focus-visible{outline:3px solid var(--gold2);outline-offset:5px}
+.scene{position:relative;min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:40px 16px;isolation:isolate;overflow:hidden}
+.scene:before{content:"";position:absolute;inset:0;z-index:-3;opacity:.13;background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 5px)}
+.scene:after{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.4));pointer-events:none}
+.brand{position:absolute;top:17px;left:50%;transform:translateX(-50%);white-space:nowrap;color:rgba(251,243,220,.48);text-transform:uppercase;letter-spacing:.2em;font-size:.62rem}
+.dust{position:absolute;inset:0;pointer-events:none;z-index:-1;overflow:hidden}.dust i{position:absolute;width:4px;height:4px;border-radius:50%;background:rgba(251,243,220,.32);animation:floatDust 12s linear infinite}
+.dust i:nth-child(1){left:8%;top:25%;animation-delay:-3s}.dust i:nth-child(2){left:17%;top:70%;animation-delay:-7s;transform:scale(.6)}.dust i:nth-child(3){left:30%;top:18%;animation-delay:-5s}.dust i:nth-child(4){left:43%;top:83%;animation-delay:-10s;transform:scale(.5)}.dust i:nth-child(5){left:58%;top:22%;animation-delay:-2s}.dust i:nth-child(6){left:70%;top:76%;animation-delay:-8s;transform:scale(.7)}.dust i:nth-child(7){left:83%;top:31%;animation-delay:-11s}.dust i:nth-child(8){left:93%;top:60%;animation-delay:-4s;transform:scale(.6)}.dust i:nth-child(9){left:37%;top:48%;animation-delay:-9s;transform:scale(.5)}.dust i:nth-child(10){left:75%;top:48%;animation-delay:-6s}
+@keyframes floatDust{0%{opacity:0;transform:translateY(30px)}20%{opacity:.8}70%{opacity:.3}100%{opacity:0;transform:translate(30px,-90px)}}
+.envelope-wrap{width:min(88vw,460px);perspective:1200px;transition:opacity .7s var(--ease),transform .9s var(--ease),filter .7s ease}.envelope-wrap.opened{opacity:0;transform:translateY(35px) scale(.75);filter:blur(5px);pointer-events:none}
+.intro{text-align:center;margin-bottom:25px}.intro small{display:block;margin-bottom:8px;color:var(--gold2);letter-spacing:.2em;text-transform:uppercase;font-size:.68rem}.intro h1{margin:0;font-weight:400;font-size:clamp(1.5rem,6vw,2.15rem)}
+.envelope{position:relative;width:100%;aspect-ratio:1.55/1;cursor:pointer;transform-style:preserve-3d;filter:drop-shadow(0 22px 30px rgba(0,0,0,.4));transition:transform .35s ease}.envelope:hover{transform:translateY(-5px)}.envelope:active{transform:scale(.985)}
+.env-back,.env-front{position:absolute;inset:0;border-radius:10px;overflow:hidden}.env-back{background:linear-gradient(135deg,rgba(255,255,255,.08),transparent 35%),linear-gradient(145deg,#1a4a34,#0d3022);border:1px solid rgba(240,210,138,.25)}.env-back:before{content:"";position:absolute;inset:0;background:linear-gradient(32deg,transparent 49.7%,rgba(251,243,220,.12) 50%,transparent 50.4%),linear-gradient(148deg,transparent 49.7%,rgba(251,243,220,.1) 50%,transparent 50.4%)}
+.env-front{z-index:4;background:#17442f;border:1px solid rgba(240,210,138,.2);clip-path:polygon(0 38%,50% 74%,100% 38%,100% 100%,0 100%)}
+.flap{position:absolute;z-index:5;inset:0 0 auto;width:100%;height:72%;transform-origin:top center;transform-style:preserve-3d;clip-path:polygon(0 0,100% 0,50% 72%);background:#20583c;border-top:1px solid rgba(240,210,138,.2);transition:transform 1s var(--ease)}.envelope.open .flap{transform:rotateX(-180deg)}
+.seal{position:absolute;z-index:10;left:50%;top:54%;width:64px;height:64px;display:grid;place-items:center;transform:translate(-50%,-50%);border-radius:50%;color:#f4d995;font-size:1.35rem;background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.18),transparent 25%),radial-gradient(circle,#a74e43,#702c27 72%);border:2px solid rgba(255,223,157,.28);box-shadow:0 6px 13px rgba(0,0,0,.35);transition:transform .55s var(--ease),opacity .4s ease}.envelope.open .seal{transform:translate(-50%,-50%) scale(.7);opacity:0}.hint{text-align:center;margin-top:19px;color:rgba(251,243,220,.58);font-size:.78rem;letter-spacing:.07em}
+.card-shell{position:absolute;width:min(94vw,640px);opacity:0;pointer-events:none;transform:translateY(45px) scale(.88);transition:opacity .9s var(--ease) .25s,transform 1s var(--ease) .25s}.card-shell.visible{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
+.card{position:relative;overflow:hidden;color:var(--ink);padding:40px 22px 27px;border-radius:16px;border:1px solid rgba(214,170,84,.65);background:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,rgba(67,107,77,.1) 32px,transparent 33px),linear-gradient(90deg,rgba(155,65,54,.12) 0 1px,transparent 1px),var(--cream);background-position:0 0,34px 0,0 0;box-shadow:0 30px 70px rgba(0,0,0,.42)}.card:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 8%,rgba(214,170,84,.15),transparent 24%),radial-gradient(circle at 90% 92%,rgba(18,59,42,.1),transparent 25%)}.card:after{content:"";position:absolute;top:0;left:0;right:0;height:7px;background:linear-gradient(90deg,var(--green2),var(--gold),var(--green2))}
+.header{position:relative;text-align:center;margin-bottom:22px}.header small{display:inline-block;margin-bottom:9px;color:#8b6a2f;letter-spacing:.2em;text-transform:uppercase;font-size:.67rem;font-weight:bold}.title{margin:0;color:var(--green);font-size:clamp(2rem,9vw,3.45rem);line-height:.98;font-weight:400;letter-spacing:-.035em}.subtitle{margin:12px auto 0;max-width:480px;color:#687668;font-size:clamp(.9rem,3vw,1.04rem);font-style:italic}.gold-line{display:flex;align-items:center;gap:12px;max-width:300px;margin:18px auto;color:var(--gold)}.gold-line:before,.gold-line:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold))}.gold-line:after{background:linear-gradient(90deg,var(--gold),transparent)}
+.short-message{position:relative;max-width:550px;margin:0 auto 25px;padding:18px 19px 18px 25px;color:#284734;font-size:clamp(1rem,3.7vw,1.18rem);line-height:1.6;font-style:italic;background:rgba(255,249,233,.72);border-left:4px solid var(--gold);box-shadow:0 8px 22px rgba(31,59,39,.08)}.short-message:before{content:"“";position:absolute;top:-13px;left:8px;color:var(--gold);font-size:3.4rem}
+.note{position:relative;max-width:550px;min-height:110px;margin:auto;padding:19px 18px;color:#253d2d;background:rgba(247,239,217,.55);border:1px dashed rgba(18,59,42,.25);border-radius:7px;transform:rotate(-.25deg);box-shadow:0 5px 15px rgba(25,45,32,.06)}.note:before{content:"A little note for you";position:absolute;top:-11px;left:17px;padding:0 7px;color:#7c6b45;background:var(--cream);font-family:"Comic Sans MS","Segoe Print",cursive;font-size:.72rem}.typed{margin:0;min-height:75px;white-space:pre-line;font-family:"Comic Sans MS","Segoe Print",cursive;font-size:clamp(.98rem,3.7vw,1.12rem);line-height:1.75}.caret{display:inline-block;width:2px;height:1.1em;margin-left:3px;vertical-align:-.15em;background:var(--green3);animation:blink .8s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+.signature{margin:22px 4px 27px;text-align:right;color:var(--green2)}.signature .closing{display:block;color:#6a776b;font-size:.8rem;font-style:italic}.signature .name{font-family:"Brush Script MT","Segoe Script",cursive;font-size:1.65rem}
+.gratitude-heading{margin:0 0 13px;color:var(--green2);text-align:center;font-size:.8rem;letter-spacing:.13em;text-transform:uppercase}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.flip{min-height:126px;perspective:900px;cursor:pointer;border-radius:10px}.flip-inner{position:relative;width:100%;min-height:126px;transform-style:preserve-3d;transition:transform .7s var(--ease)}.flip:hover .flip-inner,.flip:focus .flip-inner,.flip.flipped .flip-inner{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:13px;border-radius:10px;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden}.front{color:var(--cream);background:linear-gradient(145deg,rgba(255,255,255,.06),transparent),var(--green2);border:1px solid rgba(214,170,84,.3);box-shadow:0 6px 14px rgba(0,0,0,.13)}.front .icon{font-size:1.45rem;margin-bottom:7px}.front .label{color:var(--gold2);font-size:.75rem;letter-spacing:.07em;text-transform:uppercase}.back{transform:rotateY(180deg);color:var(--green);background:var(--cream2);border:1px solid rgba(214,170,84,.55);font-size:.86rem;line-height:1.4}
+.actions{display:flex;flex-direction:column;gap:10px;margin-top:25px}.btn{appearance:none;border:0;min-height:48px;padding:11px 20px;border-radius:999px;font-family:inherit;font-size:.92rem;font-weight:bold;letter-spacing:.03em;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease}.btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.98)}.hug{color:var(--green);background:linear-gradient(135deg,var(--gold2),var(--gold));box-shadow:0 8px 20px rgba(151,109,36,.22)}.replay{color:var(--green2);background:transparent;border:1px solid rgba(18,59,42,.3)}
+.final{max-height:0;opacity:0;overflow:hidden;text-align:center;color:var(--green2);transition:max-height .7s var(--ease),opacity .5s ease,margin .7s var(--ease)}.final.show{max-height:140px;opacity:1;margin-top:19px}.final strong{display:block;margin-bottom:4px;font-size:1.15rem}.final span{color:#687668;font-size:.85rem;font-style:italic}
+.sound{position:fixed;right:14px;bottom:14px;z-index:30;width:42px;height:42px;border:1px solid rgba(240,210,138,.25);border-radius:50%;color:var(--cream);background:rgba(11,43,30,.75);cursor:pointer}.confetti{position:fixed;inset:0;z-index:100;pointer-events:none;overflow:hidden}.confetti-piece{position:absolute;top:-20px;width:8px;height:13px;animation:fall var(--duration) cubic-bezier(.2,.7,.3,1) forwards;animation-delay:var(--delay)}@keyframes fall{0%{opacity:1;transform:translate3d(0,-30px,0) rotate(0)}100%{opacity:0;transform:translate3d(var(--drift),105vh,0) rotate(var(--rotation))}}
+@media(min-width:560px){.scene{padding:50px 24px}.card{padding:48px 46px 34px}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.actions{flex-direction:row;justify-content:center}.btn{min-width:155px}}@media(max-width:360px){.card{padding:32px 15px 22px}.grid{gap:7px}.flip,.flip-inner{min-height:116px}.front .label{font-size:.66rem}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}.caret{animation:none}}
+
+/* Mobile responsiveness enhancements */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  min-height: 100svh;
+  overflow-x: hidden;
+}
+.shell {
+  width: min(100%, 760px);
+  padding: clamp(14px, 4vw, 32px);
+}
+.stage {
+  width: 100%;
+}
+.envelope-wrap {
+  width: min(92vw, 620px);
+  margin-inline: auto;
+}
+.envelope {
+  width: 100%;
+}
+.card {
+  width: min(100%, 640px);
+  margin-inline: auto;
+}
+.card-inner {
+  padding: clamp(22px, 5vw, 42px);
+}
+.gratitude-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 2.8vw, 16px);
+}
+.flip-card {
+  min-width: 0;
+}
+.flip-card-inner {
+  min-height: 150px;
+}
+.controls {
+  flex-wrap: wrap;
+}
+button {
+  touch-action: manipulation;
+}
+
+@media (max-width: 560px) {
+  .shell { padding: 12px; }
+  .envelope-wrap { width: min(94vw, 430px); }
+  .envelope { min-height: 240px; }
+  .card-inner { padding: 24px 18px 22px; }
+  .card-title {
+    font-size: clamp(2rem, 10vw, 3rem);
+    line-height: 1;
+  }
+  .subtitle { font-size: .92rem; }
+  .short-message {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  .typed-message {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .gratitude-grid {
+    grid-template-columns: 1fr;
+  }
+  .flip-card-inner { min-height: 132px; }
+  .controls {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .controls button {
+    width: 100%;
+    min-height: 48px;
+  }
+  .controls .sound-toggle {
+    grid-column: 1 / -1;
+  }
+  .signature { font-size: 1.05rem; }
+}
+
+@media (max-width: 360px) {
+  .card-inner { padding: 20px 14px; }
+  .controls { grid-template-columns: 1fr; }
+  .controls .sound-toggle { grid-column: auto; }
+  .flip-card-inner { min-height: 126px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-dust,
+  .confetti-piece { animation: none !important; }
+}
+
+
+/* Scroll control for the note + gratitude cards */
+.scroll-to-cards {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 14px auto 0;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid rgba(218, 178, 91, .45);
+  border-radius: 999px;
+  background: rgba(246, 239, 213, .08);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  transition: transform .25s cubic-bezier(.22,1,.36,1),
+              background .25s ease,
+              box-shadow .25s ease;
+}
+.scroll-to-cards:hover,
+.scroll-to-cards:focus-visible {
+  transform: translateY(-2px);
+  background: rgba(246, 239, 213, .16);
+  box-shadow: 0 10px 28px rgba(0,0,0,.18);
+}
+.scroll-to-cards:focus-visible {
+  outline: 3px solid rgba(255, 220, 130, .75);
+  outline-offset: 3px;
+}
+.scroll-to-cards .scroll-arrow {
+  display: inline-block;
+  font-size: 1.15em;
+  animation: scrollNudge 1.8s ease-in-out infinite;
+}
+@keyframes scrollNudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+@media (max-width: 560px) {
+  .scroll-to-cards {
+    width: 100%;
+    margin-top: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-to-cards .scroll-arrow { animation: none; }
+}
+
+
+/* Clearly visible scroll controls */
+.scroll-down-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: min(100%, 330px);
+  margin: 16px auto 18px;
+  padding: 12px 18px;
+  border: 2px solid rgba(218,178,91,.65);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(218,178,91,.18), rgba(246,239,213,.08));
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,.16);
+}
+.scroll-down-btn span {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+.scroll-down-btn:hover,
+.scroll-down-btn:focus-visible {
+  transform: translateY(-2px);
+  background: rgba(218,178,91,.24);
+}
+.scroll-down-btn:focus-visible,
+.floating-scroll:focus-visible {
+  outline: 3px solid #f4d98b;
+  outline-offset: 3px;
+}
+.floating-scroll {
+  position: fixed;
+  z-index: 100;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  display: none;
+  align-items: center;
+  gap: 5px;
+  min-width: 82px;
+  min-height: 46px;
+  padding: 9px 14px;
+  border: 2px solid rgba(218,178,91,.75);
+  border-radius: 999px;
+  background: #173f31;
+  color: #f6efd5;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+.floating-scroll.show { display: inline-flex; }
+@media (max-width: 560px) {
+  .scroll-down-btn { width: 100%; min-height: 48px; }
+  .floating-scroll { display: inline-flex; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-down-btn { transition: none; }
+}
+
+</style>
+</head>
+<body>
+<main class="scene">
+<div class="brand">A little gratitude, folded with care</div>
+<div class="dust" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+<section class="envelope-wrap" id="envelopeWrap">
+<div class="intro"><small>A note of gratitude</small><h1>Something special for you</h1></div>
+<div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open your Teacher's Day card">
+<div class="env-back"></div><div class="flap"></div><div class="env-front"></div><div class="seal" aria-hidden="true">✦</div>
+</div>
+<div class="hint">Tap, click, or press Enter / Space to open</div>
+</section>
+
+<section class="card-shell" id="cardShell" aria-label="Teacher's Day greeting card" aria-hidden="true">
+<article class="card">
+<header class="header"><small>With heartfelt thanks,</small><h2 class="title">Happy Teacher's Day</h2><p class="subtitle" id="subtitle"></p><div class="gold-line" aria-hidden="true"><span>✦</span></div></header>
+<blockquote class="short-message" id="shortMessage"></blockquote>
+
+<button class="scroll-down-btn" id="scrollDownBtn" type="button"
+        aria-label="Scroll down to the personal note and gratitude cards">
+  <span aria-hidden="true">↓</span> Scroll down to the note &amp; cards
+</button>
+<section class="note" aria-label="Personal message"><p class="typed" id="typedMessage" aria-live="polite" aria-atomic="true"></p><span class="caret" id="caret" aria-hidden="true"></span></section>
+<div class="signature"><span class="closing">With gratitude,</span><span class="name" id="signature"></span></div>
+<section aria-labelledby="gratitudeHeading"><h3 class="gratitude-heading" id="gratitudeHeading">Turn these little thoughts over</h3><div class="grid" id="gratitudeGrid"></div></section>
+<div class="final" id="finalMessage" aria-live="polite"><strong>A warm hug is on its way. 🤗</strong><span>Thank you for making learning feel a little brighter.</span></div>
+<div class="actions"><button class="btn hug" id="hugButton" type="button">Send a hug 🤗</button><button class="btn replay" id="replayButton" type="button">Replay ↻</button></div>
+</article>
+</section>
+
+
+<button class="floating-scroll" id="floatingScroll" type="button"
+        aria-label="Scroll down to the note and gratitude cards">
+  ↓ <span>Scroll</span>
+</button>
+
+<button class="sound" id="soundToggle" type="button" aria-label="Turn gentle sounds on" aria-pressed="false" title="Sound off">♫</button>
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+</main>
+
+<script>
+/* ===== EDITABLE CONTENT ===== */
+const TEACHER_NAME="Dear Teacher";
+const STUDENT_NAME="Your Student";
+const SHORT_MESSAGE="Thank you for believing in me, encouraging me, and making every lesson feel like a small step toward something wonderful.";
+const MESSAGE=[
+"You have taught me more than lessons from a book.",
+"You showed me that patience, curiosity, and kindness can change the way we see the world.",
+"Thank you for every question you answered, every mistake you helped me learn from, and every moment you made me feel capable."
+];
+const GRATITUDE_CARDS=[
+{icon:"🌱",label:"You helped me grow",text:"You gave me room to learn, stumble, try again, and discover what I can do."},
+{icon:"💡",label:"You sparked ideas",text:"Your lessons made curiosity feel exciting and gave ordinary questions a little magic."},
+{icon:"🧭",label:"You gave direction",text:"Your guidance helped me find my way when something felt difficult or unfamiliar."},
+{icon:"⭐",label:"You saw potential",text:"Sometimes you believed in me before I knew how to believe in myself."},
+{icon:"🌻",label:"You made it brighter",text:"Your patience and kindness made the classroom feel like a place where I belonged."},
+{icon:"📚",label:"You made learning matter",text:"Because of you, what I learned became more than facts—it became something I could carry forward."}
+];
+
+const envelope=document.getElementById("envelope");
+const envelopeWrap=document.getElementById("envelopeWrap");
+const cardShell=document.getElementById("cardShell");
+const subtitle=document.getElementById("subtitle");
+const shortMessage=document.getElementById("shortMessage");
+const typedMessage=document.getElementById("typedMessage");
+const signature=document.getElementById("signature");
+const gratitudeGrid=document.getElementById("gratitudeGrid");
+const hugButton=document.getElementById("hugButton");
+const replayButton=document.getElementById("replayButton");
+const finalMessage=document.getElementById("finalMessage");
+const confetti=document.getElementById("confetti");
+const caret=document.getElementById("caret");
+const soundToggle=document.getElementById("soundToggle");
+const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let opened=false,typingTimer=null,soundEnabled=false,audioContext=null;
+
+subtitle.textContent=`For ${TEACHER_NAME}, with appreciation from ${STUDENT_NAME}.`;
+shortMessage.textContent=SHORT_MESSAGE;
+signature.textContent=STUDENT_NAME;
+
+function escapeHTML(text){const e=document.createElement("div");e.textContent=text;return e.innerHTML;}
+
+function buildGratitudeCards(){
+gratitudeGrid.innerHTML="";
+GRATITUDE_CARDS.forEach(item=>{
+const card=document.createElement("div");
+card.className="flip";card.tabIndex=0;card.setAttribute("role","button");
+card.setAttribute("aria-label",`${item.label}. Press Enter or Space to reveal the message.`);
+card.innerHTML=`<div class="flip-inner"><div class="front"><div class="icon" aria-hidden="true">${escapeHTML(item.icon)}</div><div class="label">${escapeHTML(item.label)}</div></div><div class="back">${escapeHTML(item.text)}</div></div>`;
+const flip=()=>{card.classList.toggle("flipped");playFlipSound();};
+card.addEventListener("click",flip);
+card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip();}});
+gratitudeGrid.appendChild(card);
+});
+}
+
+function openCard(){
+if(opened)return;opened=true;envelope.classList.add("open");playOpenSound();
+setTimeout(()=>envelopeWrap.classList.add("opened"),reducedMotion?20:650);
+setTimeout(()=>{cardShell.classList.add("visible");cardShell.setAttribute("aria-hidden","false");startTypewriter();setTimeout(()=>hugButton.focus({preventScroll:true}),reducedMotion?20:800)},reducedMotion?50:700);
+}
+
+function startTypewriter(){
+clearTimeout(typingTimer);typedMessage.textContent="";
+if(reducedMotion){typedMessage.textContent=MESSAGE.join("\n\n");caret.style.display="none";return;}
+caret.style.display="inline-block";
+const fullMessage=MESSAGE.join("\n\n");let index=0;
+function typeNext(){
+if(index>=fullMessage.length){caret.style.display="none";return;}
+const character=fullMessage[index++];typedMessage.textContent+=character;
+let delay=34+Math.random()*25;if(character==="\n")delay=230;if(/[.,!?]/.test(character))delay=145;
+typingTimer=setTimeout(typeNext,delay);
+}
+typingTimer=setTimeout(typeNext,450);
+}
+
+function replay(){
+clearTimeout(typingTimer);finalMessage.classList.remove("show");
+document.querySelectorAll(".flip").forEach(c=>c.classList.remove("flipped"));
+cardShell.classList.remove("visible");cardShell.setAttribute("aria-hidden","true");
+setTimeout(()=>{envelopeWrap.classList.remove("opened");envelope.classList.remove("open");typedMessage.textContent="";caret.style.display="inline-block";opened=false;setTimeout(()=>envelope.focus({preventScroll:true}),100)},reducedMotion?20:500);
+playResetSound();
+}
+
+function celebrate(){
+confetti.innerHTML="";const amount=reducedMotion?12:90,colors=["#d6aa54","#f0d28a","#fbf3dc","#2d6949","#8c4138"],fragment=document.createDocumentFragment();
+for(let i=0;i<amount;i++){
+const p=document.createElement("i");p.className="confetti-piece";
+p.style.left=`${Math.random()*100}%`;p.style.background=colors[Math.floor(Math.random()*colors.length)];
+p.style.width=`${5+Math.random()*5}px`;p.style.height=`${8+Math.random()*10}px`;
+p.style.setProperty("--drift",`${-120+Math.random()*240}px`);
+p.style.setProperty("--rotation",`${360+Math.random()*1200}deg`);
+p.style.setProperty("--duration",`${reducedMotion?.7:2.2+Math.random()*2}s`);
+p.style.setProperty("--delay",`${Math.random()*.45}s`);
+if(Math.random()>.5)p.style.borderRadius="50%";fragment.appendChild(p);
+}
+confetti.appendChild(fragment);setTimeout(()=>confetti.innerHTML="",5000);
+}
+
+function sendHug(){
+celebrate();finalMessage.classList.add("show");playHugSound();
+if(!reducedMotion)hugButton.animate([{transform:"scale(1)"},{transform:"scale(1.08) rotate(-1deg)"},{transform:"scale(1.04) rotate(1deg)"},{transform:"scale(1)"}],{duration:600,easing:"cubic-bezier(.22,.75,.18,1)"});
+finalMessage.scrollIntoView({behavior:reducedMotion?"auto":"smooth",block:"nearest"});
+}
+
+function ensureAudio(){
+if(!soundEnabled)return null;
+if(!audioContext){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;audioContext=new AC();}
+if(audioContext.state==="suspended")audioContext.resume();return audioContext;
+}
+function tone(frequency,duration,volume,type,delay){
+const ctx=ensureAudio();if(!ctx)return;
+const osc=ctx.createOscillator(),gain=ctx.createGain();delay=delay||0;
+osc.type=type||"sine";osc.frequency.setValueAtTime(frequency,ctx.currentTime+delay);
+gain.gain.setValueAtTime(.0001,ctx.currentTime+delay);
+gain.gain.exponentialRampToValueAtTime(volume||.018,ctx.currentTime+delay+.02);
+gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+delay+duration);
+osc.connect(gain);gain.connect(ctx.destination);osc.start(ctx.currentTime+delay);osc.stop(ctx.currentTime+delay+duration+.03);
+}
+function playOpenSound(){tone(392,.22,.018,"sine");tone(523.25,.35,.015,"sine",.08);}
+function playFlipSound(){tone(620,.08,.012,"triangle");}
+function playHugSound(){tone(523.25,.16,.018,"sine");tone(659.25,.18,.018,"sine",.08);tone(783.99,.28,.018,"sine",.17);}
+function playResetSound(){tone(392,.14,.012,"sine");}
+
+envelope.addEventListener("click",openCard);
+envelope.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openCard();}});
+hugButton.addEventListener("click",sendHug);
+replayButton.addEventListener("click",replay);
+soundToggle.addEventListener("click",()=>{
+soundEnabled=!soundEnabled;soundToggle.setAttribute("aria-pressed",String(soundEnabled));
+soundToggle.setAttribute("aria-label",soundEnabled?"Turn gentle sounds off":"Turn gentle sounds on");
+soundToggle.title=soundEnabled?"Sound on":"Sound off";soundToggle.textContent=soundEnabled?"🔊":"♫";
+if(soundEnabled){ensureAudio();tone(523.25,.12,.014,"sine");}
+});
+buildGratitudeCards();
+
+/* Offline Teacher's Day melody — generated with Web Audio, no external files required. */
+let melodyTimer = null;
+let melodyStep = 0;
+const TEACHER_DAY_MELODY = [
+  ["G4", 0.26], ["B4", 0.26], ["D5", 0.38], ["B4", 0.26],
+  ["A4", 0.26], ["C5", 0.26], ["E5", 0.42], ["C5", 0.26],
+  ["B4", 0.26], ["D5", 0.26], ["G5", 0.46], ["D5", 0.26],
+  ["A4", 0.26], ["C5", 0.26], ["E5", 0.40], ["G5", 0.55]
+];
+const NOTE_FREQ = {
+  G4:392.00, A4:440.00, B4:493.88, C5:523.25,
+  D5:587.33, E5:659.25, G5:783.99
+};
+
+function playTeacherNote(note, duration=0.3) {
+  if (!audioCtx || muted || !NOTE_FREQ[note]) return;
+  const now = audioCtx.currentTime;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  const filter = audioCtx.createBiquadFilter();
+  osc.type = "sine";
+  osc.frequency.value = NOTE_FREQ[note];
+  filter.type = "lowpass";
+  filter.frequency.value = 1800;
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(0.045, now + 0.025);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+  osc.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start(now);
+  osc.stop(now + duration + 0.03);
+}
+
+function startTeacherDayMelody() {
+  stopTeacherDayMelody();
+  if (muted) return;
+  melodyStep = 0;
+  const tick = () => {
+    if (muted) return;
+    const [note, dur] = TEACHER_DAY_MELODY[melodyStep % TEACHER_DAY_MELODY.length];
+    playTeacherNote(note, dur);
+    melodyStep++;
+    melodyTimer = setTimeout(tick, Math.max(220, dur * 1000 + 35));
+  };
+  tick();
+}
+
+function stopTeacherDayMelody() {
+  if (melodyTimer) {
+    clearTimeout(melodyTimer);
+    melodyTimer = null;
+  }
+}
+
+
+/* Mobile-friendly audio behavior: user gesture starts the melody, replay restarts it. */
+document.addEventListener("click", (event) => {
+  const target = event.target.closest("button, .envelope, .wax-seal, [role='button']");
+  if (!target) return;
+  const label = ((target.getAttribute("aria-label") || "") + " " + (target.textContent || "")).toLowerCase();
+  if (!muted && (label.includes("sound") || label.includes("open") || label.includes("replay"))) {
+    try { if (audioCtx && audioCtx.state === "suspended") audioCtx.resume(); } catch(e) {}
+    if (label.includes("replay")) startTeacherDayMelody();
+  }
+}, {passive:true});
+
+
+/* Smooth scroll button for the note and gratitude cards */
+(function () {
+  const btn = document.getElementById("scrollToCards");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    const target =
+      document.querySelector(".gratitude-grid") ||
+      document.querySelector(".gratitude") ||
+      document.querySelector(".typed-message");
+
+    if (!target) return;
+
+    target.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+      block: "start"
+    });
+  });
+})();
+
+
+/* Robust scroll controls: target the actual IDs used by this card. */
+(function () {
+  const topBtn = document.getElementById("scrollDownBtn");
+  const floatBtn = document.getElementById("floatingScroll");
+  const note = document.getElementById("typedMessage");
+  const cards = document.getElementById("gratitudeGrid");
+
+  function scrollToContent() {
+    const target = note || cards;
+    if (!target) return;
+    target.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start"
+    });
+  }
+
+  if (topBtn) topBtn.addEventListener("click", scrollToContent);
+  if (floatBtn) floatBtn.addEventListener("click", scrollToContent);
+
+  function updateScrollButton() {
+    if (!floatBtn) return;
+    const card = document.querySelector(".card-shell");
+    const visible = card && !card.hasAttribute("aria-hidden");
+    const canScroll = document.documentElement.scrollHeight > window.innerHeight + 40;
+    floatBtn.classList.toggle("show", !!visible && canScroll);
+  }
+
+  window.addEventListener("scroll", updateScrollButton, {passive:true});
+  window.addEventListener("resize", updateScrollButton, {passive:true});
+  setTimeout(updateScrollButton, 300);
+})();
+
+</script>
+</body>
+</html>
