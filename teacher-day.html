@@ -132,54 +132,6 @@ button {
 }
 
 
-/* Scroll control for the note + gratitude cards */
-.scroll-to-cards {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin: 14px auto 0;
-  min-height: 44px;
-  padding: 10px 16px;
-  border: 1px solid rgba(218, 178, 91, .45);
-  border-radius: 999px;
-  background: rgba(246, 239, 213, .08);
-  color: inherit;
-  cursor: pointer;
-  font: inherit;
-  box-shadow: 0 8px 24px rgba(0,0,0,.12);
-  transition: transform .25s cubic-bezier(.22,1,.36,1),
-              background .25s ease,
-              box-shadow .25s ease;
-}
-.scroll-to-cards:hover,
-.scroll-to-cards:focus-visible {
-  transform: translateY(-2px);
-  background: rgba(246, 239, 213, .16);
-  box-shadow: 0 10px 28px rgba(0,0,0,.18);
-}
-.scroll-to-cards:focus-visible {
-  outline: 3px solid rgba(255, 220, 130, .75);
-  outline-offset: 3px;
-}
-.scroll-to-cards .scroll-arrow {
-  display: inline-block;
-  font-size: 1.15em;
-  animation: scrollNudge 1.8s ease-in-out infinite;
-}
-@keyframes scrollNudge {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(4px); }
-}
-@media (max-width: 560px) {
-  .scroll-to-cards {
-    width: 100%;
-    margin-top: 12px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .scroll-to-cards .scroll-arrow { animation: none; }
-}
 
 
 /* Clearly visible scroll controls */
@@ -238,96 +190,79 @@ button {
 @media (max-width: 560px) {
   .scroll-down-btn { width: 100%; min-height: 48px; }
   .floating-scroll { display: inline-flex; }
-  /* =================================
-   VERTICAL SCROLL NAVIGATION
-================================= */
-
-.scroll-navigation {
-    position: fixed;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    z-index: 999;
-
-    padding: 8px;
-
-    background: rgba(11, 43, 30, 0.85);
-
-    border: 1px solid rgba(240, 210, 138, 0.35);
-
-    border-radius: 30px;
-
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-
-    backdrop-filter: blur(8px);
 }
 
-/* Individual Buttons */
 
-.scroll-button {
-    width: 42px;
-    height: 42px;
+/* =========================================================
+   FINAL CARD LAYOUT
+   Larger container with an internal, mobile-friendly scrollbar
+========================================================= */
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid rgba(240, 210, 138, 0.4);
-
-    border-radius: 50%;
-
-    background: #17442f;
-
-    color: #f0d28a;
-
-    font-size: 16px;
-
-    cursor: pointer;
-
-    transition:
-        background 0.3s ease,
-        transform 0.3s ease;
+.card {
+  position: relative;
+  width: min(95vw, 900px);
+  max-height: 88svh;
+  margin-inline: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  padding: clamp(28px, 5vw, 55px);
+  scrollbar-width: auto;
+  scrollbar-color: #999 #1c1c1c;
 }
 
-/* Hover Effect */
-
-.scroll-button:hover {
-    background: #2d6949;
-
-    transform: scale(1.1);
-}
-.scroll-button:active {
-    transform: scale(0.95);
+.card-inner {
+  padding: clamp(22px, 4vw, 42px);
 }
 
-.scroll-button:focus-visible {
-    outline: 3px solid #f0d28a;
-    outline-offset: 3px;}
+/* Chromium / Safari scrollbar styling */
+.card::-webkit-scrollbar {
+  width: 14px;
 }
-@media (prefers-reduced-motion: reduce) {
-  .scroll-down-btn { transition: none; }
-  /* =================================
-   MOBILE RESPONSIVE NAVIGATION
-================================= */
+
+.card::-webkit-scrollbar-track {
+  background: #1c1c1c;
+  border-radius: 10px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background: #999;
+  border: 3px solid #1c1c1c;
+  border-radius: 20px;
+}
+
+.card::-webkit-scrollbar-thumb:hover {
+  background: #c0c0c0;
+}
+
+/* Keep the card large on desktop and comfortable on mobile */
+@media (min-width: 900px) {
+  .card {
+    min-height: 78svh;
+  }
+}
 
 @media (max-width: 600px) {
+  .card {
+    width: 96vw;
+    max-height: 84svh;
+    padding: 24px 16px;
+    border-radius: 14px;
+  }
 
-.scroll-navigation {
-        right: 8px;
-        padding: 6px;
-        gap: 8px;
-        border-radius: 25px;}
+  .card-inner {
+    padding: 20px 12px;
+  }
 
- .scroll-button {
-        width: 36px;
-        height: 36px;
-        font-size: 13px;}
+  .card::-webkit-scrollbar {
+    width: 9px;
+  }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    scroll-behavior: auto;
+  }
 }
 
 </style>
@@ -350,10 +285,6 @@ button {
 <header class="header"><small>With heartfelt thanks,</small><h2 class="title">Happy Teacher's Day</h2><p class="subtitle" id="subtitle"></p><div class="gold-line" aria-hidden="true"><span>✦</span></div></header>
 <blockquote class="short-message" id="shortMessage"></blockquote>
 
-<button class="scroll-down-btn" id="scrollDownBtn" type="button"
-        aria-label="Scroll down to the personal note and gratitude cards">
-  <span aria-hidden="true">↓</span> Scroll down to the note &amp; cards
-</button>
 <section class="note" aria-label="Personal message"><p class="typed" id="typedMessage" aria-live="polite" aria-atomic="true"></p><span class="caret" id="caret" aria-hidden="true"></span></section>
 <div class="signature"><span class="closing">With gratitude,</span><span class="name" id="signature"></span></div>
 <section aria-labelledby="gratitudeHeading"><h3 class="gratitude-heading" id="gratitudeHeading">Turn these little thoughts over</h3><div class="grid" id="gratitudeGrid"></div></section>
@@ -362,46 +293,29 @@ button {
 </article>
 </section>
 
-  <!-- Vertical Scroll Navigation -->
-<div class="scroll-navigation">
 
-    <!-- Scroll Up -->
-    <button
-        id="scrollUp"
-        class="scroll-button"
-        type="button"
-        aria-label="Scroll up">
-        ▲
-    </button>
 
-    <!-- Scroll Down -->
-    <button
-        id="scrollDown"
-        class="scroll-button"
-        type="button"
-        aria-label="Scroll down">
-        ▼
-    </button>
+<button class="sound" id="soundToggle" type="button" aria-label="Turn music on" aria-pressed="false" title="Music off">♫</button>
 
-</div>
-
-<button class="sound" id="soundToggle" type="button" aria-label="Turn gentle sounds on" aria-pressed="false" title="Sound off">♫</button> 
-<audio id="teachersMusic" loop>
-    <source src="teachers-music.mp3" type="audio/mpeg">
-    Your browser does not support audio.
+<!-- Optional Teacher's Day background music.
+     Place teacher-music.mp3 in the same folder as this HTML file. -->
+<audio id="teachersMusic" loop preload="metadata">
+  <source src="teachers-music.mp3" type="audio/mpeg">
+  Your browser does not support audio.
 </audio>
+
 <div class="confetti" id="confetti" aria-hidden="true"></div>
 </main>
 
 <script>
 /* ===== EDITABLE CONTENT ===== */
 const TEACHER_NAME="Dear Teacher";
-const STUDENT_NAME="Your Student";
+const STUDENT_NAME="Your Student🫶M❤️";
 const SHORT_MESSAGE="Thank you for believing in me, encouraging me, and making every lesson feel like a small step toward something wonderful.";
 const MESSAGE=[
 "You have taught me more than lessons from a book.",
 "You showed me that patience, curiosity, and kindness can change the way we see the world.",
-"Thank you for every question you answered, every mistake you helped me learn from, and every moment you made me feel capable."
+"Thank you for every question you answered, every mistake you helped me learn from and every moment you made me feel capable."
 ];
 const GRATITUDE_CARDS=[
 {icon:"🌱",label:"You helped me grow",text:"You gave me room to learn, stumble, try again, and discover what I can do."},
@@ -426,43 +340,7 @@ const finalMessage=document.getElementById("finalMessage");
 const confetti=document.getElementById("confetti");
 const caret=document.getElementById("caret");
 const soundToggle=document.getElementById("soundToggle");
-const teacherMusic = document.getElementById("teachersMusic");
-
-let musicPlaying = false;
-soundToggle.addEventListener("click", () => {
-
-    if (!musicPlaying) {
-
-      teacherMusic.play()
-            .then(() => {
-                musicPlaying = true;
-
-                soundToggle.textContent = "🔊";
-                soundToggle.title = "Music on";
-                soundToggle.setAttribute(
-                    "aria-label",
-                    "Turn music off"
-                );
-            })
-            .catch(error => {
-                console.log("Music could not play:", error);
-            });
-
-    } else {
-
-        teacherMusic.pause();
-        musicPlaying = false;
-
-        soundToggle.textContent = "♫";
-        soundToggle.title = "Music off";
-        soundToggle.setAttribute(
-            "aria-label",
-            "Turn music on"
-        );
-
-    }
-
-});
+const teacherMusic=document.getElementById("teachersMusic");
 const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let opened=false,typingTimer=null,soundEnabled=false,audioContext=null;
 
@@ -559,151 +437,28 @@ envelope.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preve
 hugButton.addEventListener("click",sendHug);
 replayButton.addEventListener("click",replay);
 soundToggle.addEventListener("click",()=>{
-soundEnabled=!soundEnabled;soundToggle.setAttribute("aria-pressed",String(soundEnabled));
-soundToggle.setAttribute("aria-label",soundEnabled?"Turn gentle sounds off":"Turn gentle sounds on");
-soundToggle.title=soundEnabled?"Sound on":"Sound off";soundToggle.textContent=soundEnabled?"🔊":"♫";
-if(soundEnabled){ensureAudio();tone(523.25,.12,.014,"sine");}
+soundEnabled=!soundEnabled;
+soundToggle.setAttribute("aria-pressed",String(soundEnabled));
+soundToggle.setAttribute("aria-label",soundEnabled?"Turn music off":"Turn music on");
+soundToggle.title=soundEnabled?"Music on":"Music off";
+soundToggle.textContent=soundEnabled?"🔊":"♫";
+
+if(soundEnabled){
+  ensureAudio();
+  tone(523.25,.12,.014,"sine");
+  if(teachersMusic){
+    teachersMusic.play().catch(error=>{
+      console.log("Music playback requires user interaction:", error);
+    });
+  }
+} else {
+  if(teachersMusic){
+    teachersMusic.pause();
+    teachersMusic.currentTime=0;
+  }
+}
 });
 buildGratitudeCards();
-
-/* Offline Teacher's Day melody — generated with Web Audio, no external files required. */
-let melodyTimer = null;
-let melodyStep = 0;
-const TEACHER_DAY_MELODY = [
-  ["G4", 0.26], ["B4", 0.26], ["D5", 0.38], ["B4", 0.26],
-  ["A4", 0.26], ["C5", 0.26], ["E5", 0.42], ["C5", 0.26],
-  ["B4", 0.26], ["D5", 0.26], ["G5", 0.46], ["D5", 0.26],
-  ["A4", 0.26], ["C5", 0.26], ["E5", 0.40], ["G5", 0.55]
-];
-const NOTE_FREQ = {
-  G4:392.00, A4:440.00, B4:493.88, C5:523.25,
-  D5:587.33, E5:659.25, G5:783.99
-};
-
-function playTeacherNote(note, duration=0.3) {
-  if (!audioCtx || muted || !NOTE_FREQ[note]) return;
-  const now = audioCtx.currentTime;
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  const filter = audioCtx.createBiquadFilter();
-  osc.type = "sine";
-  osc.frequency.value = NOTE_FREQ[note];
-  filter.type = "lowpass";
-  filter.frequency.value = 1800;
-  gain.gain.setValueAtTime(0.0001, now);
-  gain.gain.exponentialRampToValueAtTime(0.045, now + 0.025);
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-  osc.connect(filter);
-  filter.connect(gain);
-  gain.connect(audioCtx.destination);
-  osc.start(now);
-  osc.stop(now + duration + 0.03);
-}
-
-function startTeacherDayMelody() {
-  stopTeacherDayMelody();
-  if (muted) return;
-  melodyStep = 0;
-  const tick = () => {
-    if (muted) return;
-    const [note, dur] = TEACHER_DAY_MELODY[melodyStep % TEACHER_DAY_MELODY.length];
-    playTeacherNote(note, dur);
-    melodyStep++;
-    melodyTimer = setTimeout(tick, Math.max(220, dur * 1000 + 35));
-  };
-  tick();
-}
-
-function stopTeacherDayMelody() {
-  if (melodyTimer) {
-    clearTimeout(melodyTimer);
-    melodyTimer = null;
-  }
-}
-
-
-/* Mobile-friendly audio behavior: user gesture starts the melody, replay restarts it. */
-document.addEventListener("click", (event) => {
-  const target = event.target.closest("button, .envelope, .wax-seal, [role='button']");
-  if (!target) return;
-  const label = ((target.getAttribute("aria-label") || "") + " " + (target.textContent || "")).toLowerCase();
-  if (!muted && (label.includes("sound") || label.includes("open") || label.includes("replay"))) {
-    try { if (audioCtx && audioCtx.state === "suspended") audioCtx.resume(); } catch(e) {}
-    if (label.includes("replay")) startTeacherDayMelody();
-  }
-}, {passive:true});
-
-
-/* Smooth scroll button for the note and gratitude cards */
-(function () {
-  const btn = document.getElementById("scrollToCards");
-  if (!btn) return;
-
-  btn.addEventListener("click", () => {
-    const target =
-      document.querySelector(".gratitude-grid") ||
-      document.querySelector(".gratitude") ||
-      document.querySelector(".typed-message");
-
-    if (!target) return;
-
-    target.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
-      block: "start"
-    });
-  });
-})();
-
-
-/* Robust scroll controls: target the actual IDs used by this card. */
-(function () {
-  const topBtn = document.getElementById("scrollDownBtn");
-  const floatBtn = document.getElementById("floatingScroll");
-  const note = document.getElementById("typedMessage");
-  const cards = document.getElementById("gratitudeGrid");
-
-  function scrollToContent() {
-    const target = note || cards;
-    if (!target) return;
-    target.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-      block: "start"
-    });
-  }
-
-  if (topBtn) topBtn.addEventListener("click", scrollToContent);
-  if (floatBtn) floatBtn.addEventListener("click", scrollToContent);
-
-  function updateScrollButton() {
-    if (!floatBtn) return;
-    const card = document.querySelector(".card-shell");
-    const visible = card && !card.hasAttribute("aria-hidden");
-    const canScroll = document.documentElement.scrollHeight > window.innerHeight + 40;
-    floatBtn.classList.toggle("show", !!visible && canScroll);
-  }
-
-  window.addEventListener("scroll", updateScrollButton, {passive:true});
-  window.addEventListener("resize", updateScrollButton, {passive:true});
-  setTimeout(updateScrollButton, 300);
-const scrollUpButton = document.getElementById("scrollUp");
-const scrollDownButton = document.getElementById("scrollDown");
-scrollUpButton.addEventListener("click", () => {
-    window.scrollBy({
-        top: -window.innerHeight * 0.7,
-        behavior: "smooth"
-    });
-});
-scrollDownButton.addEventListener("click", () => {
-    window.scrollBy({
-        top: window.innerHeight * 0.7,
-        behavior: "smooth"
-    });
-});
-  
-})();
-
 </script>
 </body>
 </html>
