@@ -23,8 +23,7 @@ button,[tabindex]{-webkit-tap-highlight-color:transparent}button:focus-visible,[
 .env-front{z-index:4;background:#17442f;border:1px solid rgba(240,210,138,.2);clip-path:polygon(0 38%,50% 74%,100% 38%,100% 100%,0 100%)}
 .flap{position:absolute;z-index:5;inset:0 0 auto;width:100%;height:72%;transform-origin:top center;transform-style:preserve-3d;clip-path:polygon(0 0,100% 0,50% 72%);background:#20583c;border-top:1px solid rgba(240,210,138,.2);transition:transform 1s var(--ease)}.envelope.open .flap{transform:rotateX(-180deg)}
 .seal{position:absolute;z-index:10;left:50%;top:54%;width:64px;height:64px;display:grid;place-items:center;transform:translate(-50%,-50%);border-radius:50%;color:#f4d995;font-size:1.35rem;background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.18),transparent 25%),radial-gradient(circle,#a74e43,#702c27 72%);border:2px solid rgba(255,223,157,.28);box-shadow:0 6px 13px rgba(0,0,0,.35);transition:transform .55s var(--ease),opacity .4s ease}.envelope.open .seal{transform:translate(-50%,-50%) scale(.7);opacity:0}.hint{text-align:center;margin-top:19px;color:rgba(251,243,220,.58);font-size:.78rem;letter-spacing:.07em}
-.card-shell {position: absolute;top: 50%;left: 50%;width: min(95vw, 900px);max-height: 90svh;transform: translate(-50%, -50%) translateY(45px) scale(.88);}
-.card-shell.visible {transform: translate(-50%, -50%) translateY(0) scale(1);}
+.card-shell{position:absolute;width:min(94vw,640px);opacity:0;pointer-events:none;transform:translateY(45px) scale(.88);transition:opacity .9s var(--ease) .25s,transform 1s var(--ease) .25s}.card-shell.visible{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
 .card{position:relative;overflow:hidden;color:var(--ink);padding:40px 22px 27px;border-radius:16px;border:1px solid rgba(214,170,84,.65);background:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,rgba(67,107,77,.1) 32px,transparent 33px),linear-gradient(90deg,rgba(155,65,54,.12) 0 1px,transparent 1px),var(--cream);background-position:0 0,34px 0,0 0;box-shadow:0 30px 70px rgba(0,0,0,.42)}.card:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 8%,rgba(214,170,84,.15),transparent 24%),radial-gradient(circle at 90% 92%,rgba(18,59,42,.1),transparent 25%)}.card:after{content:"";position:absolute;top:0;left:0;right:0;height:7px;background:linear-gradient(90deg,var(--green2),var(--gold),var(--green2))}
 .header{position:relative;text-align:center;margin-bottom:22px}.header small{display:inline-block;margin-bottom:9px;color:#8b6a2f;letter-spacing:.2em;text-transform:uppercase;font-size:.67rem;font-weight:bold}.title{margin:0;color:var(--green);font-size:clamp(2rem,9vw,3.45rem);line-height:.98;font-weight:400;letter-spacing:-.035em}.subtitle{margin:12px auto 0;max-width:480px;color:#687668;font-size:clamp(.9rem,3vw,1.04rem);font-style:italic}.gold-line{display:flex;align-items:center;gap:12px;max-width:300px;margin:18px auto;color:var(--gold)}.gold-line:before,.gold-line:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold))}.gold-line:after{background:linear-gradient(90deg,var(--gold),transparent)}
 .short-message{position:relative;max-width:550px;margin:0 auto 25px;padding:18px 19px 18px 25px;color:#284734;font-size:clamp(1rem,3.7vw,1.18rem);line-height:1.6;font-style:italic;background:rgba(255,249,233,.72);border-left:4px solid var(--gold);box-shadow:0 8px 22px rgba(31,59,39,.08)}.short-message:before{content:"“";position:absolute;top:-13px;left:8px;color:var(--gold);font-size:3.4rem}
@@ -37,8 +36,7 @@ button,[tabindex]{-webkit-tap-highlight-color:transparent}button:focus-visible,[
 .sound{position:fixed;right:14px;bottom:14px;z-index:30;width:42px;height:42px;border:1px solid rgba(240,210,138,.25);border-radius:50%;color:var(--cream);background:rgba(11,43,30,.75);cursor:pointer}.confetti{position:fixed;inset:0;z-index:100;pointer-events:none;overflow:hidden}.confetti-piece{position:absolute;top:-20px;width:8px;height:13px;animation:fall var(--duration) cubic-bezier(.2,.7,.3,1) forwards;animation-delay:var(--delay)}@keyframes fall{0%{opacity:1;transform:translate3d(0,-30px,0) rotate(0)}100%{opacity:0;transform:translate3d(var(--drift),105vh,0) rotate(var(--rotation))}}
 @media(min-width:560px){.scene{padding:50px 24px}.card{padding:48px 46px 34px}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.actions{flex-direction:row;justify-content:center}.btn{min-width:155px}}@media(max-width:360px){.card{padding:32px 15px 22px}.grid{gap:7px}.flip,.flip-inner{min-height:116px}.front .label{font-size:.66rem}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}.caret{animation:none}}
-@media (max-width: 600px) {.card-shell {width: 96vw; max-height: 88svh;}}
-  
+
 /* Mobile responsiveness enhancements */
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -267,6 +265,31 @@ button {
   }
 }
 
+
+/* =========================================================
+   CENTER THE LETTER CONTAINER
+========================================================= */
+
+.card-shell {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(95vw, 900px);
+  max-height: 90svh;
+  transform: translate(-50%, -50%) translateY(45px) scale(.88);
+}
+
+.card-shell.visible {
+  transform: translate(-50%, -50%) translateY(0) scale(1);
+}
+
+@media (max-width: 600px) {
+  .card-shell {
+    width: 96vw;
+    max-height: 88svh;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -312,12 +335,12 @@ button {
 <script>
 /* ===== EDITABLE CONTENT ===== */
 const TEACHER_NAME="Dear Teacher";
-const STUDENT_NAME="Your Student🫶M❤️";
+const STUDENT_NAME="Your Student🫶 M";
 const SHORT_MESSAGE="Thank you for believing in me, encouraging me, and making every lesson feel like a small step toward something wonderful.";
 const MESSAGE=[
 "You have taught me more than lessons from a book.",
 "You showed me that patience, curiosity, and kindness can change the way we see the world.",
-"Thank you for every question you answered, every mistake you helped me learn from and every moment you made me feel capable."
+"Thank you for every question you answered, every mistake you helped me learn from, and every moment you made me feel capable."
 ];
 const GRATITUDE_CARDS=[
 {icon:"🌱",label:"You helped me grow",text:"You gave me room to learn, stumble, try again, and discover what I can do."},
@@ -342,7 +365,7 @@ const finalMessage=document.getElementById("finalMessage");
 const confetti=document.getElementById("confetti");
 const caret=document.getElementById("caret");
 const soundToggle=document.getElementById("soundToggle");
-const teacherMusic=document.getElementById("teachersMusic");
+const teachersMusic=document.getElementById("teachersMusic");
 const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let opened=false,typingTimer=null,soundEnabled=false,audioContext=null;
 
@@ -461,6 +484,9 @@ if(soundEnabled){
 }
 });
 buildGratitudeCards();
+
+
+
 </script>
 </body>
 </html>
